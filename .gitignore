@@ -1,0 +1,21 @@
+# Environment variables (contains secret API keys)
+.env
+*.env
+
+# Python cache & build files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Vector database index (large binary files)
+faiss_index/
+
+# IDE files
+.vscode/
+.idea/
