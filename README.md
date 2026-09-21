@@ -91,10 +91,10 @@ Files:
 
 ## Project Structure
 
-- main.py: The main Streamlit application script.
-- langchain_helper.py: This has all the langchain code, now sentiment-aware via `get_response()`
-- sentiment.py: Sentiment detection (transformers, with a VADER fallback)
-- response_adapter.py: Sentiment-based tone instructions and response shaping
-- test_sentiment.py: Standalone sentiment accuracy check
-- requirements.txt: A list of required Python packages for the project.
-- .env: Configuration file for storing your Google API key.
+- `src/main.py`: The main Streamlit application script.
+- `src/langchain_helper.py`: RAG pipeline and LLM query helper.
+- `src/sentiment.py`: Sentiment detection engine.
+- `src/response_adapter.py`: Response adaptation layer.
+- `src/test_sentiment.py`: Automated sentiment test suite.
+- `requirements.txt`: Python package dependencies.
+- `.env` *(create locally on your machine)*: Local configuration file for storing your `GOOGLE_API_KEY`.
