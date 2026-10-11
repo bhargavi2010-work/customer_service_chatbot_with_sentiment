@@ -1,97 +1,99 @@
-# 🎓 NullClass AI Q&A Chatbot
+# Customer Service Chatbot Q&A
 
-An intelligent, sentiment-aware student support chatbot built using **LangChain**, **Google Generative AI (Gemini / PaLM)**, **FAISS Vector Database**, and **Streamlit**.
-
----
-
-## 📌 About the Project
-
-**NullClass** is an e-learning platform that offers data-related courses and virtual internships. With thousands of enrolled students asking repetitive questions on Discord and email, human support staff spend hours answering common queries every day.
-
-This project solves that problem by building an automated **AI-powered Q&A Assistant**:
-- Uses the **real FAQ dataset** from NullClass.
-- Helps students get instant, accurate answers 24/7 in just seconds.
-- Detects the student's emotional tone (happy, neutral, or frustrated) to respond with appropriate empathy.
-- Flags urgent issues (like refunds) for human staff assistance.
+An intelligent question-and-answer support system built using LangChain, Google Generative AI (Gemini / PaLM), FAISS Vector Database, and Streamlit for an e-learning platform.
 
 ---
 
-## ✨ Key Features
+## About the Project
 
-- **⚡ Instant & Accurate Answers**: Retrieves answers directly from NullClass's official course & internship FAQs.
-- **🧠 Semantic Search with FAISS**: Understands user intent even if students ask questions using different words or phrasing.
-- **🤖 Powered by Google LLM & LangChain**: Generates natural, complete, and polite answers using RAG (Retrieval-Augmented Generation).
-- **🎭 Sentiment Analysis & Tone Adaptation**:
-  - 😊 **Positive**: Responds enthusiastically and supportively.
-  - 😐 **Neutral**: Gives direct, clear information.
-  - 😡 **Negative / Angry**: Expresses empathy, apologizes for inconvenience, and calms the student.
-- **🚨 Human Escalation Trigger**: Automatically flags urgent messages (e.g., refund requests, severe complaints) so human mentors can intervene.
-- **📊 Live Interactive UI**: Built with Streamlit, showing live sentiment tags, confidence metrics, and a sentiment history trend chart.
+NullClass is an e-learning company that offers data-related courses and virtual internships. With thousands of enrolled learners asking questions daily on Discord and email, human support staff spend significant time answering repetitive queries.
+
+This project provides an automated, AI-powered customer service Q&A chatbot:
+- Built using a real FAQ dataset used by NullClass support staff.
+- Enables students to ask course and internship questions directly and get answers in seconds.
+- Analyzes customer sentiment (positive, neutral, or negative) to adapt response tone with empathy.
+- Flags urgent inquiries (such as refund requests) for human staff escalation.
 
 ---
 
-## 🔄 How It Works (Project Workflow)
+## Key Features
+
+- Instant FAQ Answers: Retrieves verified answers directly from course and internship FAQ data.
+- Semantic Search with FAISS: Understands learner intent using HuggingFace sentence embeddings, even if the question is phrased differently.
+- Generative AI Responses: Connects with Google LLM via LangChain to generate clear, polite, and contextual answers.
+- Sentiment Analysis & Tone Adaptation:
+  - Positive: Responds enthusiastically and helpfully.
+  - Neutral: Provides concise, direct answers.
+  - Negative: Acknowledges user frustration empathetically before answering.
+- Human Escalation Alert: Detects critical complaints (e.g., refund requests or strong dissatisfaction) and flags them for human team follow-up.
+- Streamlit Web Interface: Clean web dashboard with real-time sentiment indicators, confidence metrics, and sentiment distribution analytics.
+
+---
+
+## Working Flow
 
 ```text
-                  [ Student Types Question ]
-                              │
-            ┌─────────────────┴─────────────────┐
-            ▼                                   ▼
+                  [ User Asks a Question ]
+                              |
+            +-----------------+-----------------+
+            |                                   |
+            v                                   v
   1. Sentiment Analyzer                 2. FAISS Vector Search
-  • Detects Positive / Neutral / Angry   • HuggingFace Embeddings
-  • Checks for Escalation keywords      • Finds matching FAQ context
-            │                                   │
-            └─────────────────┬─────────────────┘
-                              ▼
+  - Classifies: Positive/Neutral/Negative- HuggingFace Embeddings
+  - Checks for Escalation keywords      - Finds relevant FAQ context
+            |                                   |
+            +-----------------+-----------------+
+                              |
+                              v
                    3. LangChain Prompt Engine
-                   • Injects FAQ context
-                   • Applies tone instruction based on mood
-                              │
-                              ▼
+                   - Injects retrieved FAQ context
+                   - Applies tone instruction based on user mood
+                              |
+                              v
                   4. Google Generative AI (LLM)
-                  • Generates helpful, polite answer
-                              │
-                              ▼
-                   5. Streamlit Web Interface
-                   • Shows answer + sentiment badge + tone adapter
-                   • Displays human alert if escalation is needed
+                  - Generates accurate, tailored response
+                              |
+                              v
+                   5. Streamlit Web Dashboard
+                   - Displays answer, sentiment badge, and confidence
+                   - Triggers human alert if escalation is flagged
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Frontend**: Streamlit
-- **LLM & Framework**: Google Generative AI (`gemini-3.6-flash` / PaLM), LangChain
-- **Vector Store & Embeddings**: FAISS, HuggingFace (`sentence-transformers/all-MiniLM-L6-v2`)
-- **Sentiment Detection**: HuggingFace Transformers (`DistilBERT`) with automatic fallback to VADER (`nltk`)
-- **Language**: Python 3.10+
+- Frontend: Streamlit
+- LLM & Orchestration: Google Generative AI (gemini-3.6-flash / PaLM), LangChain
+- Vector Store & Embeddings: FAISS, HuggingFace (sentence-transformers/all-MiniLM-L6-v2)
+- Sentiment Analysis: HuggingFace Transformers (DistilBERT) with automatic fallback to VADER (nltk)
+- Language: Python 3.10+
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 customer_service_chatbot/
-│
-├── dataset/
-│   └── dataset.csv          # Real FAQ dataset from NullClass (Questions & Answers)
-├── faiss_index/             # Saved vector database for fast similarity search
-│   ├── index.faiss
-│   └── index.pkl
-├── src/
-│   ├── main.py              # Streamlit web app interface
-│   ├── langchain_helper.py  # RAG pipeline & LLM response logic
-│   ├── sentiment.py         # Sentiment analysis engine
-│   ├── response_adapter.py  # Tone formatting & empathetic opener/closers
-│   └── test_sentiment.py    # Test script to test sentiment without LLM
-├── requirements.txt         # Required Python packages
-└── .env                     # Stores GOOGLE_API_KEY (kept private)
+|
+|-- dataset/
+|   `-- dataset.csv          # FAQ dataset (Questions and Answers)
+|-- faiss_index/             # Saved vector database index
+|   |-- index.faiss
+|   `-- index.pkl
+|-- src/
+|   |-- main.py              # Main Streamlit web application
+|   |-- langchain_helper.py  # RAG pipeline and LLM query logic
+|   |-- sentiment.py         # Sentiment analysis module
+|   |-- response_adapter.py  # Tone formatting and opener/closer wrapping
+|   `-- test_sentiment.py    # Standalone script for sentiment testing
+|-- requirements.txt         # Project dependencies
+`-- .env                     # Local environment file for GOOGLE_API_KEY
 ```
 
 ---
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 ### 1. Clone the Repository
 ```bash
@@ -104,12 +106,11 @@ cd customer_service_chatbot_with_sentiment
 pip install -r requirements.txt
 ```
 
-### 3. Add Your Google API Key
-Create a `.env` file in the root folder and add your key:
+### 3. Configure Google API Key
+Create a `.env` file in the root folder and add your API key:
 ```env
 GOOGLE_API_KEY="your_google_api_key_here"
 ```
-*(You can get a free key from Google AI Studio / MakerSuite).*
 
 ### 4. Run the Streamlit Application
 ```bash
@@ -117,22 +118,22 @@ streamlit run src/main.py
 ```
 
 ### 5. Using the App
-1. When you first open the app, click **"Create Knowledgebase"** to build the FAISS index from the FAQ dataset.
-2. Once created, type your question in the text box and get instant answers!
+1. When opening the app for the first time, click "Create Knowledgebase" to generate the FAISS vector index.
+2. Type any question in the input field and press Enter to receive an instant answer.
 
 ---
 
-## 💡 Sample Questions to Try
+## Sample Questions
 
-- *Do you provide internships and also offer EMI payments?*
-- *Do you have a JavaScript course?*
-- *Should I learn Power BI or Tableau?*
-- *I have a Mac computer. Can I use Power BI on it?*
-- *I am facing an issue with my assignment and I am really frustrated.* (Tests negative sentiment & tone adaptation)
-- *I want a refund immediately!* (Tests human escalation trigger)
+- Do you guys provide internship and also do you offer EMI payments?
+- Do you have a javascript course?
+- Should I learn power bi or tableau?
+- I have a MAC computer. Can I use powerbi on it?
+- I am facing an issue with my assignment and I am really frustrated.
+- I want a refund immediately!
 
 ---
 
-## 👥 Use Case Summary
+## Summary
 
-Built as an academic GenAI project to demonstrate how **Retrieval-Augmented Generation (RAG)** combined with **Sentiment Analysis** can automate repetitive student support in real-world EdTech companies like NullClass.
+This project demonstrates how Retrieval-Augmented Generation (RAG) combined with sentiment analysis can automate front-line customer service and student inquiry support in an e-learning organization.
