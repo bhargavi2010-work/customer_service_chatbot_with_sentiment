@@ -1,100 +1,138 @@
+# 🎓 NullClass AI Q&A Chatbot
 
-# Generatve AI Q&A: Question and Answer System Based on Google Palm LLM and Langchain for E-learning company  
+An intelligent, sentiment-aware student support chatbot built using **LangChain**, **Google Generative AI (Gemini / PaLM)**, **FAISS Vector Database**, and **Streamlit**.
 
-This is an end to end LLM project based on Google Palm and Langchain. We are building a Q&A system for an e-learning company called Nullclass.Nullclass sells data related courses and virtual internships. They have thousands of learners who uses discord server or email to ask questions. This system will provide a streamlit based user interface for students where they can ask questions and get answers. 
+---
 
+## 📌 About the Project
 
-## Project Highlights
+**NullClass** is an e-learning platform that offers data-related courses and virtual internships. With thousands of enrolled students asking repetitive questions on Discord and email, human support staff spend hours answering common queries every day.
 
-- Use a real CSV file of FAQs that Nullclass company is using right now. 
-- Their human staff will use this file to assist their course learners.
-- We will build an LLM based question and answer system that can reduce the workload of their human staff.
-- Students should be able to use this system to ask questions directly and get answers within seconds
+This project solves that problem by building an automated **AI-powered Q&A Assistant**:
+- Uses the **real FAQ dataset** from NullClass.
+- Helps students get instant, accurate answers 24/7 in just seconds.
+- Detects the student's emotional tone (happy, neutral, or frustrated) to respond with appropriate empathy.
+- Flags urgent issues (like refunds) for human staff assistance.
 
+---
 
+## ✨ Key Features
 
-## Installation
+- **⚡ Instant & Accurate Answers**: Retrieves answers directly from NullClass's official course & internship FAQs.
+- **🧠 Semantic Search with FAISS**: Understands user intent even if students ask questions using different words or phrasing.
+- **🤖 Powered by Google LLM & LangChain**: Generates natural, complete, and polite answers using RAG (Retrieval-Augmented Generation).
+- **🎭 Sentiment Analysis & Tone Adaptation**:
+  - 😊 **Positive**: Responds enthusiastically and supportively.
+  - 😐 **Neutral**: Gives direct, clear information.
+  - 😡 **Negative / Angry**: Expresses empathy, apologizes for inconvenience, and calms the student.
+- **🚨 Human Escalation Trigger**: Automatically flags urgent messages (e.g., refund requests, severe complaints) so human mentors can intervene.
+- **📊 Live Interactive UI**: Built with Streamlit, showing live sentiment tags, confidence metrics, and a sentiment history trend chart.
 
-1.Clone this repository to your local machine using:
+---
 
-```bash
-  git clone https://github.com/aslin72/customer_service_chatbot_LLM.git
+## 🔄 How It Works (Project Workflow)
+
+```text
+                  [ Student Types Question ]
+                              │
+            ┌─────────────────┴─────────────────┐
+            ▼                                   ▼
+  1. Sentiment Analyzer                 2. FAISS Vector Search
+  • Detects Positive / Neutral / Angry   • HuggingFace Embeddings
+  • Checks for Escalation keywords      • Finds matching FAQ context
+            │                                   │
+            └─────────────────┬─────────────────┘
+                              ▼
+                   3. LangChain Prompt Engine
+                   • Injects FAQ context
+                   • Applies tone instruction based on mood
+                              │
+                              ▼
+                  4. Google Generative AI (LLM)
+                  • Generates helpful, polite answer
+                              │
+                              ▼
+                   5. Streamlit Web Interface
+                   • Shows answer + sentiment badge + tone adapter
+                   • Displays human alert if escalation is needed
 ```
-2.Navigate to the project directory:
 
-```bash
-  cd customer_service_chatbot_LLM
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Streamlit
+- **LLM & Framework**: Google Generative AI (`gemini-3.6-flash` / PaLM), LangChain
+- **Vector Store & Embeddings**: FAISS, HuggingFace (`sentence-transformers/all-MiniLM-L6-v2`)
+- **Sentiment Detection**: HuggingFace Transformers (`DistilBERT`) with automatic fallback to VADER (`nltk`)
+- **Language**: Python 3.10+
+
+---
+
+## 📂 Project Structure
+
+```text
+customer_service_chatbot/
+│
+├── dataset/
+│   └── dataset.csv          # Real FAQ dataset from NullClass (Questions & Answers)
+├── faiss_index/             # Saved vector database for fast similarity search
+│   ├── index.faiss
+│   └── index.pkl
+├── src/
+│   ├── main.py              # Streamlit web app interface
+│   ├── langchain_helper.py  # RAG pipeline & LLM response logic
+│   ├── sentiment.py         # Sentiment analysis engine
+│   ├── response_adapter.py  # Tone formatting & empathetic opener/closers
+│   └── test_sentiment.py    # Test script to test sentiment without LLM
+├── requirements.txt         # Required Python packages
+└── .env                     # Stores GOOGLE_API_KEY (kept private)
 ```
-3. Install the required dependencies using pip:
 
+---
+
+## 🚀 How to Run the Project
+
+### 1. Clone the Repository
 ```bash
-  pip install -r requirements.txt
-```
-4.Acquire an api key through makersuite.google.com and put it in .env file
-
-```bash
-  GOOGLE_API_KEY="your_api_key_here"
-```
-## Usage
-
-1. Run the Streamlit app by executing:
-```bash
-streamlit run main.py
-
+git clone https://github.com/bhargavi2010-work/customer_service_chatbot_with_sentiment.git
+cd customer_service_chatbot_with_sentiment
 ```
 
-2.The web app will open in your browser.
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-- To create a knowledebase of FAQs, click on Create Knolwedge Base button. It will take some time before knowledgebase is created so please wait.
+### 3. Add Your Google API Key
+Create a `.env` file in the root folder and add your key:
+```env
+GOOGLE_API_KEY="your_google_api_key_here"
+```
+*(You can get a free key from Google AI Studio / MakerSuite).*
 
-- Once knowledge base is created you will see a directory called faiss_index in your current folder
+### 4. Run the Streamlit Application
+```bash
+streamlit run src/main.py
+```
 
-- Now you are ready to ask questions. Type your question in Question box and hit Enter
+### 5. Using the App
+1. When you first open the app, click **"Create Knowledgebase"** to build the FAISS index from the FAQ dataset.
+2. Once created, type your question in the text box and get instant answers!
 
-## Sample Questions
-  - Do you guys provide internship and also do you offer EMI payments?
-  - Do you have javascript course?
-  - Should I learn power bi or tableau?
-  - I've a MAC computer. Can I use powerbi on it?
-  - I don't see power pivot. how can I enable it?
+---
 
-## Sentiment Analysis
+## 💡 Sample Questions to Try
 
-Every incoming question is passed through a sentiment analyzer before the
-answer is generated:
+- *Do you provide internships and also offer EMI payments?*
+- *Do you have a JavaScript course?*
+- *Should I learn Power BI or Tableau?*
+- *I have a Mac computer. Can I use Power BI on it?*
+- *I am facing an issue with my assignment and I am really frustrated.* (Tests negative sentiment & tone adaptation)
+- *I want a refund immediately!* (Tests human escalation trigger)
 
-- **Detection**: uses a HuggingFace `transformers` sentiment model
-  (`distilbert-base-uncased-finetuned-sst-2-english`), classified into
-  `positive` / `neutral` / `negative`. If `transformers`/`torch` aren't
-  installed, it automatically falls back to VADER (`nltk`) so the app still
-  runs.
-- **Response adaptation**:
-  - The LLM's own prompt is given a tone instruction matching the detected
-    sentiment (e.g. acknowledge frustration before answering, for negative
-    messages).
-  - The final reply is wrapped with a short, deterministic opener/closer
-    per sentiment (e.g. an empathetic opener for negative messages, a
-    friendly closer for positive ones), so the tone is consistent even if
-    the LLM doesn't fully follow the prompt instruction.
-  - Strongly negative messages (high-confidence negative, or containing
-    phrases like "refund", "unacceptable", "cancel my") are flagged with
-    `escalate: True` and shown a notice that a human agent will follow up.
-- **UI**: the Streamlit app shows the detected sentiment badge and
-  confidence under each answer, and a warning banner when a message is
-  flagged for escalation.
+---
 
-Files:
-- `sentiment.py` — sentiment detection (`SentimentAnalyzer`)
-- `response_adapter.py` — tone instructions + response wrapping
-- `test_sentiment.py` — quick standalone check against sample messages
-  (`python test_sentiment.py`), no API key or vector DB needed
+## 👥 Use Case Summary
 
-## Project Structure
-
-- `src/main.py`: The main Streamlit application script.
-- `src/langchain_helper.py`: RAG pipeline and LLM query helper.
-- `src/sentiment.py`: Sentiment detection engine.
-- `src/response_adapter.py`: Response adaptation layer.
-- `src/test_sentiment.py`: Automated sentiment test suite.
-- `requirements.txt`: Python package dependencies.
-- `.env` *(create locally on your machine)*: Local configuration file for storing your `GOOGLE_API_KEY`.
+Built as an academic GenAI project to demonstrate how **Retrieval-Augmented Generation (RAG)** combined with **Sentiment Analysis** can automate repetitive student support in real-world EdTech companies like NullClass.
