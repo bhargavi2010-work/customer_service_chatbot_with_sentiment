@@ -58,18 +58,26 @@ with left_col:
                 st.header("Answer")
                 st.write(result["answer"])
 
-                # Sentiment Analysis Card Box (Image 1 Style)
+                # If escalated, show prominent human escalation action banner
+                if result.get("escalate"):
+                    st.error(
+                        "🚨 **Action Required: Ticket Escalated to Human Support**\n\n"
+                        "This interaction has been flagged for priority intervention. A senior support specialist "
+                        "has been notified and will follow up with the user. You can also reach human dispatch directly at **support@nullclass.com**."
+                    )
+
+                # Sentiment Analysis Card Box
                 with st.container(border=True):
-                    st.markdown("### 📊 Sentiment Analysis")
+                    st.markdown("### 📊 Sentiment & Tone Analysis")
                     
                     s_color = "#dc2626" if sentiment == "negative" else ("#16a34a" if sentiment == "positive" else "#ca8a04")
                     s_bg = "#fee2e2" if sentiment == "negative" else ("#dcfce7" if sentiment == "positive" else "#fef9c3")
                     
-                    esc_val = "Yes" if result["escalate"] else "No"
+                    esc_val = "Yes (Priority Queue)" if result["escalate"] else "No"
                     esc_color = "#dc2626" if result["escalate"] else "#16a34a"
                     esc_bg = "#fee2e2" if result["escalate"] else "#dcfce7"
 
-                    reason_text = "High negative sentiment detected" if result["escalate"] else ("Customer expressed satisfaction" if sentiment == "positive" else "Standard query")
+                    reason_text = "High customer frustration or urgent escalation intent detected" if result["escalate"] else ("Customer expressed satisfaction or enthusiasm" if sentiment == "positive" else "Standard informational inquiry")
 
                     st.markdown(f"**Detected Sentiment:** &nbsp;&nbsp; <span style='background-color:{s_bg}; color:{s_color}; padding:4px 14px; border-radius:12px; font-weight:bold;'>{sentiment.capitalize()}</span>", unsafe_allow_html=True)
                     st.markdown(f"<div style='margin-top:10px;'><b>Confidence Score:</b> &nbsp;&nbsp; <span style='background-color:#dbeafe; color:#2563eb; padding:4px 14px; border-radius:12px; font-weight:bold;'>{result['confidence']:.1%}</span></div>", unsafe_allow_html=True)

@@ -1,4 +1,4 @@
-# langchain_helper.py - RAG pipeline with sentiment analysis
+# langchain_helper.py - Grounded RAG pipeline with sentiment analysis and tone adaptation
 
 import os
 from dotenv import load_dotenv
@@ -21,7 +21,7 @@ llm = GoogleGenerativeAI(model="gemini-3.6-flash", google_api_key=api_key, tempe
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 vectordb_file_path = "faiss_index"
-_sentiment_analyzer = SentimentAnalyzer()
+_sentiment_analyzer = SentimentAnalyzer(prefer_transformers=False)
 
 
 # create vector database from CSV dataset
@@ -34,19 +34,25 @@ def create_vector_db():
     vectordb.save_local(vectordb_file_path)
 
 
-# build prompt template with sentiment instruction
+# build prompt template with sentiment instruction and strict grounding
 def _build_prompt(sentiment):
     tone_instruction = build_prompt_instruction(sentiment)
 
-    prompt_template = f"""You are a helpful customer service assistant.
-    Use the following context to answer the question if it contains relevant information.
-    If the answer is not found in the context, answer the user's question directly, accurately, and politely using your general knowledge.
+    prompt_template = f"""You are an official customer support assistant for NullClass e-learning platform.
 
-    TONE INSTRUCTION: {tone_instruction}
+CRITICAL INSTRUCTIONS:
+1. Answer the question accurately and honestly using ONLY the factual information provided in the FAQ CONTEXT below.
+2. If the answer is NOT present in the provided FAQ context, do NOT invent, guess, or fabricate company policies, course pricing, refund terms, or timeline promises. Instead, state clearly:
+   "I apologize, but that specific detail is not covered in our official FAQ database. Please reach out to our support team at support@nullclass.com or on our Discord community, and we will be happy to assist you."
+3. TONE & EMPATHY INSTRUCTION: {tone_instruction}
 
-    CONTEXT: {{context}}
+FAQ CONTEXT:
+{{context}}
 
-    QUESTION: {{question}}"""
+CUSTOMER QUESTION:
+{{question}}
+
+OFFICIAL RESPONSE:"""
 
     return PromptTemplate(
         template=prompt_template, input_variables=["context", "question"]
@@ -56,7 +62,7 @@ def _build_prompt(sentiment):
 # create qa chain
 def get_qa_chain(sentiment="neutral"):
     vectordb = FAISS.load_local(vectordb_file_path, embeddings, allow_dangerous_deserialization=True)
-    retriever = vectordb.as_retriever()
+    retriever = vectordb.as_retriever(search_kwargs={"k": 2})
     PROMPT = _build_prompt(sentiment)
 
     chain = RetrievalQA.from_chain_type(
@@ -80,12 +86,14 @@ def get_response(question):
     raw_answer = raw.get("result", "")
     source_docs = raw.get("source_documents", [])
 
-    # fallback to LLM direct generation if chain result is empty or I don't know
-    if not raw_answer or "don't know" in raw_answer.lower():
-        tone_instruction = build_prompt_instruction(sentiment_result["sentiment"])
-        direct_prompt = f"Answer this customer question accurately and politely. TONE: {tone_instruction}\nQuestion: {question}"
-        raw_answer = llm.invoke(direct_prompt)
+    # If the retrieved context cannot answer or result is empty, use safe grounded fallback
+    if not raw_answer or "don't know" in raw_answer.lower() or "not mentioned" in raw_answer.lower():
+        raw_answer = (
+            "I apologize, but I do not have verified information regarding your inquiry in our official FAQ database. "
+            "Please reach out directly to our support desk at support@nullclass.com or on our official Discord channel so an administrator can assist you."
+        )
 
+    # Shape response with sentiment opener, closer, and escalation banner if needed
     final_answer = shape_response(raw_answer, sentiment_result)
 
     return {

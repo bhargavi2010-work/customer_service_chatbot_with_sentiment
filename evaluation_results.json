@@ -1,0 +1,348 @@
+{
+  "detection_evaluation": {
+    "overall_accuracy": 97.2,
+    "class_metrics": {
+      "positive": {
+        "Precision": 100.0,
+        "Recall": 100.0,
+        "F1-Score": 100.0,
+        "Support": 10
+      },
+      "neutral": {
+        "Precision": 93.3,
+        "Recall": 100.0,
+        "F1-Score": 96.6,
+        "Support": 14
+      },
+      "negative": {
+        "Precision": 100.0,
+        "Recall": 91.7,
+        "F1-Score": 95.7,
+        "Support": 12
+      }
+    },
+    "escalation_metrics": {
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1": 100.0
+    },
+    "results_log": [
+      {
+        "text": "I absolutely love this course, best decision ever!",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.875
+      },
+      {
+        "text": "Thanks, that answers my question perfectly.",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.796
+      },
+      {
+        "text": "Great customer service, super helpful!",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.902
+      },
+      {
+        "text": "The mentors on Discord are fantastic and very responsive.",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.571
+      },
+      {
+        "text": "I really enjoyed the hands-on project in the data course.",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.556
+      },
+      {
+        "text": "Amazing learning experience so far, highly recommended!",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.754
+      },
+      {
+        "text": "Thank you so much for clarifying the EMI options.",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.361
+      },
+      {
+        "text": "The internship certificate looks great, thank you!",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.784
+      },
+      {
+        "text": "Loving the curriculum, very well structured.",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.743
+      },
+      {
+        "text": "Super clear explanation, appreciate the quick help!",
+        "true_sentiment": "positive",
+        "pred_sentiment": "positive",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.904
+      },
+      {
+        "text": "What are the payment options for the bootcamp?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "Can I get the syllabus for this course?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "Do you support Mac OS for powerbi?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.69
+      },
+      {
+        "text": "I want to book a demo class",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.755
+      },
+      {
+        "text": "What is your refund policy?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "tissue",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "I have an issue logging into my account",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "How long is the internship duration?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "Are the live classes recorded for later viewing?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "What prerequisites do I need for the data analytics course?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "Can I switch batches if my college exams clash?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "Where can I find the discord community invite link?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.583
+      },
+      {
+        "text": "Do you offer certificates upon completion?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "What is the start date for the next cohort?",
+        "true_sentiment": "neutral",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 1.0
+      },
+      {
+        "text": "The course video is broken and nothing works",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.477
+      },
+      {
+        "text": "I am dissatisfied with the course quality.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.382
+      },
+      {
+        "text": "I'm not interested in this course anymore",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.309
+      },
+      {
+        "text": "The audio in lecture 4 is very low and hard to hear.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.469
+      },
+      {
+        "text": "The portal has been lagging today, it is quite annoying.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.624
+      },
+      {
+        "text": "The assignment submission link is giving a 404 error.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "neutral",
+        "true_escalate": false,
+        "pred_escalate": false,
+        "confidence": 0.541
+      },
+      {
+        "text": "This is the worst support experience I've ever had, I want a refund.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": true,
+        "pred_escalate": true,
+        "confidence": 0.85
+      },
+      {
+        "text": "I've emailed three times and nobody has responded. Completely unacceptable.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": true,
+        "pred_escalate": true,
+        "confidence": 0.85
+      },
+      {
+        "text": "This is a scam and total waste of money!",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": true,
+        "pred_escalate": true,
+        "confidence": 0.85
+      },
+      {
+        "text": "I want a refund right now!",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": true,
+        "pred_escalate": true,
+        "confidence": 0.85
+      },
+      {
+        "text": "Nobody is helping me and I demand to cancel my course immediately.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": true,
+        "pred_escalate": true,
+        "confidence": 0.85
+      },
+      {
+        "text": "You charged my card twice without consent, I will take legal action if not fixed today.",
+        "true_sentiment": "negative",
+        "pred_sentiment": "negative",
+        "true_escalate": true,
+        "pred_escalate": true,
+        "confidence": 0.85
+      }
+    ]
+  },
+  "satisfaction_impact_evaluation": {
+    "overall_baseline_csat": 3.36,
+    "overall_adapted_csat": 4.44,
+    "csat_increase_percent": 32.1,
+    "breakdown": [
+      {
+        "Category": "Negative / Frustrated Queries",
+        "Count": 12,
+        "Baseline_CSAT": 2.0,
+        "Adapted_CSAT": 4.3,
+        "Improvement": "+115.0%"
+      },
+      {
+        "Category": "Neutral / General Inquiries",
+        "Count": 14,
+        "Baseline_CSAT": 4.0,
+        "Adapted_CSAT": 4.3,
+        "Improvement": "+7.5%"
+      },
+      {
+        "Category": "Positive / Satisfied Queries",
+        "Count": 10,
+        "Baseline_CSAT": 4.1,
+        "Adapted_CSAT": 4.8,
+        "Improvement": "+17.1%"
+      }
+    ]
+  }
+}
